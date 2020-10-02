@@ -9,10 +9,19 @@ package com.example.calculator_check;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btnDot,btnPlus,btnMin,btnMul,btnDiv,btnEqual,btnC;
+    Button btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btnDot,btnPlus,btnMin,btnMul,btnDiv,btnEqual,btnC,btnMod;
     EditText ed1;
     Double res1,res2;
-    Boolean Add,Sub,Mul,Div;
+    Boolean Add,Sub,Mul,Div,Mod;
+
+    void setfalse(){
+        Add=false;
+        Sub=false;
+        Mul=false;
+        Div=false;
+        Mod=false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btnMul= (Button) findViewById(R.id.btnMul);
         btnDiv= (Button) findViewById(R.id.btnDiv);
         btnC= (Button) findViewById(R.id.btnC);
-
+        btnMod=(Button) findViewById(R.id.btnMod);
         ed1=(EditText) findViewById(R.id.editText);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
                 if(ed1==null)
                 { ed1.setText(""); }
                 else{
+
                     res1=Double.parseDouble(ed1.getText()+"");
+                    setfalse();
                     Add=true;
                     ed1.setText(null);
                 }
@@ -123,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 { ed1.setText(""); }
                 else{
                     res1=Double.parseDouble(ed1.getText()+"");
+                    setfalse();
                     Sub=true;
                     ed1.setText(null);
                 }
@@ -135,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 { ed1.setText(""); }
                 else{
                     res1=Double.parseDouble(ed1.getText()+"");
+                    setfalse();
                     Mul=true;
                     ed1.setText(null);
                 }
@@ -147,7 +160,21 @@ public class MainActivity extends AppCompatActivity {
                 { ed1.setText(""); }
                 else{
                     res1=Double.parseDouble(ed1.getText()+"");
+                    setfalse();
                     Div=true;
+                    ed1.setText(null);
+                }
+            }
+        });
+        btnMod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ed1==null)
+                { ed1.setText(""); }
+                else{
+                    res1=Double.parseDouble(ed1.getText()+"");
+                    setfalse();
+                    Mod=true;
                     ed1.setText(null);
                 }
             }
@@ -173,6 +200,10 @@ public class MainActivity extends AppCompatActivity {
                     ed1.setText(res1 / res2 + "");
                     Div=false;
                 }
+                else if(Mod == true){
+                    ed1.setText(res1 % res2 + "");
+                    Mod=false;
+                }
 
             }
         });
@@ -181,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ed1.setText("");
+                res1=null;
             }
         });
     }
